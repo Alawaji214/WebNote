@@ -1,17 +1,24 @@
 .App {
   text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+
+  width: 100%;
+  height: 100vh; /* full viewport height */
+  padding: 20px;
+  background-color: #ffffcc; /* lighter yellow color */
+  
+  border: 1px solid #cccccc; /* lighter gray color */
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Indie Flower', cursive; /* handwriting-like font */
+
+  display: flex; /* use flexbox */
+  justify-content: center; /* center horizontally */
+  align-items: center; /* center vertically */
+  flex-direction: column; /* stack children vertically */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
 .App-header {
   background-color: #282c34;
@@ -24,15 +31,83 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+
+.App h1 {
+  font-size: 24px;
+  color: #333;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.note-list {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 800px; /* limit maximum width */
+  min-height: 50vh; /* minimum height */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 20px;
+  padding: 20px;
+  /* border-radius: 10px; */
+  /* background-color: #f5f5f5; */
+  /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); */
+  margin-top: 20px;
+}
+
+.note-list .note {
+
+  width: 100%;
+
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f0e68c; /* khaki color */
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+
+  font-size: 1.5em; /* larger font size */
+  margin-bottom: 20px;
+}
+
+.note-list .note:hover {
+  transform: scale(1.02);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.note form {
+  display: flex;
+  gap: 10px;
+}
+
+.note form input {
+  flex-grow: 1;
+  width: 100%;
+  padding: 10px;
+
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+
+  background-color: #f0e68c; /* match note background color */
+
+  font-size: 1.5em; /* match note font size */
+  margin-bottom: 10px; /* reduce margin */
+
+}
+
+.note form button {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #d2b48c; /* darker khaki color */
+  color: #333; /* dark text color for contrast */
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.note form button:hover {
+  background-color: #b38f68; /* even darker color on hover */
 }
