@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Note = ({ note, handleUpdate }) => {
+const Note = ({ note, handleUpdate, handleDelete }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newContent, setNewContent] = useState(note.content);
 
@@ -23,8 +23,11 @@ const Note = ({ note, handleUpdate }) => {
         </form>
       ) : (
         <p onClick={() => setIsEditing(true)}>{note.content}</p>
+        
       )}
+      <button className="delete-button" onClick={() => handleDelete(note.id)}>x</button>
     </div>
+    
   );
 };
 

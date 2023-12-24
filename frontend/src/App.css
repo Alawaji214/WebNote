@@ -70,6 +70,8 @@
 
   font-size: 1.5em; /* larger font size */
   margin-bottom: 20px;
+
+  position: relative; /* Add relative positioning to the note */
 }
 
 .note-list .note:hover {
@@ -111,4 +113,32 @@
 
 .note form button:hover {
   background-color: #b38f68; /* even darker color on hover */
+}
+
+.create-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* make the button circular */
+  font-size: 24px; /* size of the plus sign */
+  text-align: center;
+  border: none;
+  background-color: #f0e68c; /* match note background color */
+  color: #333; /* dark text color for contrast */
+  cursor: pointer;
+  margin-bottom: 20px; /* space between the button and the first note */
+}
+
+.delete-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%; /* make the button circular */
+  font-size: 16px; /* size of the X */
+  text-align: center;
+  border: none;
+  background-color: #333; /* match note background color */
+  color: #f0e68c; /* dark text color for contrast */
+  cursor: pointer;
+  position: absolute; /* position the button relative to the note */
+  right: 10px; /* position the button on the right */
+  top: 10px; /* position the button at the top */
 }
