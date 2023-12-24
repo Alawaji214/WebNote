@@ -142,3 +142,46 @@
   right: 10px; /* position the button on the right */
   top: 10px; /* position the button at the top */
 }
+
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  margin: 0 auto;
+  padding: 50px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.signin-label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.signin-input {
+  width: 80%;
+  margin-left: auto; /* add automatic left margin */
+  margin-right: auto; /* add automatic right margin */
+
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.signin-submit {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 20px; /* Add this line */
+}
+
+.signin-submit:hover {
+  background-color: #45a049;
+}

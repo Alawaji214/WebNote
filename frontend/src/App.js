@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import NoteList from './NoteList';
+import AuthPage from './AuthPage';
 import './App.css';
 
 import { v4 as uuidv4 } from 'uuid';
@@ -10,6 +11,8 @@ const App = () => {
     { id: uuidv4(), content: 'Note 1' },
     { id: uuidv4(), content: 'Note 2' },
   ]);
+
+  const [isSignedIn, setIsSignedIn] = useState(false); 
 
   const getGreeting = () => {
     const currentHour = new Date().getHours();
@@ -43,10 +46,17 @@ const App = () => {
     setNotes(notes.map(note => note.id === id ? { ...note, content: newContent } : note));
   };
 
+  const handleSignIn = () => {
+    setIsSignedIn(true);
+  };
+
   return (
     <div className="App">
       <h1>{getGreeting()}, welcome to the note-taking app!</h1>
+      { !isSignedIn && <AuthPage handleSignIn={handleSignIn} /> }
+      { isSignedIn &&
       <NoteList notes={notes} handleUpdate={handleUpdate} handleCreate={handleCreate} handleDelete={handleDelete}/>
+      }
     </div>
   );
 };
