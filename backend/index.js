@@ -6,7 +6,7 @@ const app = express();
 const port = 4000;
 
 const userRoutes = require('./routes/userRoute')
-const userRoutes = require('./routes/noteRoute')
+const noteRoutes = require('./routes/noteRoute')
 
 // Mock user and notes data
 const user = { id: 1, name: 'John Doe' };
@@ -19,7 +19,7 @@ const notes = [
 app.use(express.json());
 
 app.use('/v1/user', userRoutes);
-app.use('/v1/note', userRoutes);
+app.use('/v1/note', noteRoutes);
 
 // Define routes
 app.get('/', (req, res) => {
