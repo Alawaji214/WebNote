@@ -3,7 +3,6 @@ require('dotenv').config();
 const express = require('express');
 const connectDB = require('./config/db');
 const app = express();
-
 const port = 4000;
 
 // Mock user and notes data
@@ -13,6 +12,8 @@ const notes = [
   { userId: 1, content: 'Note 2' },
   { userId: 2, content: 'Note 3' },
 ];
+
+app.use(express.json());
 
 // Define routes
 app.get('/', (req, res) => {
