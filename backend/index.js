@@ -6,6 +6,8 @@ const app = express();
 const port = 4000;
 
 const userRoutes = require('./routes/userRoute')
+const userRoutes = require('./routes/noteRoute')
+
 // Mock user and notes data
 const user = { id: 1, name: 'John Doe' };
 const notes = [
@@ -17,6 +19,8 @@ const notes = [
 app.use(express.json());
 
 app.use('/v1/user', userRoutes);
+app.use('/v1/note', userRoutes);
+
 // Define routes
 app.get('/', (req, res) => {
     res.send('Welcome to WebNote!');
