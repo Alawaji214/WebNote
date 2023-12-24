@@ -1,5 +1,9 @@
+require('dotenv').config();
+
 const express = require('express');
+const connectDB = require('./config/db');
 const app = express();
+
 const port = 4000;
 
 // Mock user and notes data
@@ -21,7 +25,18 @@ app.get('/notes', (req, res) => {
     res.json(userNotes);
 });
 
+// Function to start the server
+async function startServer() {
+    try {
+        await connectDB();  // Wait for database connection
+        app.listen(port, () => {
+            console.log(`Server is running on port ${port}`);
+        });
+    } catch (error) {
+        console.error('Failed to connect to the database', error);
+        process.exit(1); // Exit process with failure
+    }
+}
+
 // Start the server
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-});
+startServer();
