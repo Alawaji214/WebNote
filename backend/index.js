@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
+const cors = require('cors');
 const connectDB = require('./config/db');
 const app = express();
 const port = 4000;
@@ -16,6 +17,7 @@ const notes = [
   { userId: 2, content: 'Note 3' },
 ];
 
+app.use(cors());
 app.use(express.json());
 
 app.use('/v1/user', userRoutes);

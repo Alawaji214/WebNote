@@ -10,6 +10,65 @@ import React, { useState } from 'react';
       handleSignIn();
     };
   
+    const handleSignup = (event) => {
+      event.preventDefault();
+      fetch(`http://localhost:4000/v1/user/signup`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password,
+          email: "dummy@any.com"
+        }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data._id) { // if the response contains an _id, signup was successful
+          handleSignIn();
+        } else {
+          // handle signup failure
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+      // You can call handleSignIn() here if signup is successful
+      console.log("signup");
+    };
+  
+    const handleLogin = (event) => {
+      event.preventDefault();
+      // handle login
+      // You can call handleSignIn() here if login is successful
+      console.log("login");
+
+      fetch('http://localhost:4000/v1/user/login', { // replace with your server URL
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.token) {
+          handleSignIn();
+        } else {
+          // handle authentication failure
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+
+      // handleSignIn();
+    };
+
     return (
         <div className="signin-form">
         <form onSubmit={handleSubmit}>
@@ -21,8 +80,8 @@ import React, { useState } from 'react';
             Password:
             <input type="password" className="signin-input" value={password} onChange={(e) => setPassword(e.target.value)} />
           </label>
-          <input type="submit" className="signin-submit" value="Signup" />
-          <input type="submit" className="signin-submit" value="Login" />
+          <input type="submit" className="signin-submit" value="Signup" onClick={handleSignup}/>
+          <input type="submit" className="signin-submit" value="Login" onClick={handleLogin}/>
         </form>
       </div>
     );
