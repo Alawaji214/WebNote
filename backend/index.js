@@ -5,9 +5,10 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 const app = express();
 const port = 4000;
-
+const path = require('path')
 const userRoutes = require('./routes/userRoute')
 const noteRoutes = require('./routes/noteRoute')
+const restRoutes = require('./routes/resetPassword')
 
 // Mock user and notes data
 const user = { id: 1, name: 'John Doe' };
@@ -19,9 +20,18 @@ const notes = [
 
 app.use(cors());
 app.use(express.json());
+// app.use(express.static(path.join(__dirname,"..","frontend","build")))
+app.use(express.static("public"))
 
 app.use('/v1/user', userRoutes);
 app.use('/v1/note', noteRoutes);
+app.use('/v1/reset', restRoutes);
+
+
+app.use((req,res,next)=>{
+    // res.sendFile(path.join(__dirname,"..","frontend","build","index.html"))
+    res.sendFile(path.join(__dirname,"public","index.html"))
+})
 
 // Define routes
 app.get('/', (req, res) => {

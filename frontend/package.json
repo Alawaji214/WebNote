@@ -12,10 +12,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start-client": "react-scripts start",
     "build": "react-scripts build",
+    "cp-build-to-backend": "cp -r build ../backend/public",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start": "npm run build && npm run cp-build-to-backend && (cd ../backend && npm start)"
   },
   "eslintConfig": {
     "extends": [

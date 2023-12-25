@@ -7,7 +7,7 @@ const authenticateToken = require("../middlewares/authenticateToken");
 
 router.get("/note",authenticateToken, async (req, res) => {
     try {
-        const userNotes = await Note.findAll({
+        const userNotes = await Note.find({
             userId: req.user.userId
         });
         res.status(201).json(userNotes);
@@ -27,13 +27,42 @@ router.post("/note",authenticateToken, async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 });
+
+router.get("/note/:noteId",authenticateToken, async (req, res) => {
+    try {
+        const note = await Note.findOne({
+            userId: req.user.userId,
+            _id: req.params.noteId
+        });
+        if(note == null){
+            res.status(404).json({content: 'Not found'});
+            return
+        }
+        res.status(200).json(note);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});
 router.delete("/note/:noteId",authenticateToken, async (req, res) => {
     try {
-        const userNotes = await Note.findAll({
+        const originalNote = await Note.deleteOne({
             userId: req.user.userId,
-            __id: req.params.noteId
+            _id: req.params.noteId
         });
-        res.status(201).json(userNotes);
+        res.status(201).json(originalNote);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});
+router.put("/note/:noteId",authenticateToken, async (req, res) => {
+    try {
+        console.log(req.params.noteId)
+        const originalNote = await Note.findOneAndUpdate({
+            _id: req.params.noteId,
+            userId: req.user.userId
+        },
+        { $set: {content:  req.body.content } });
+        res.status(200).json(originalNote);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
