@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import SignupComponent from './SignupComponent'; // Import the SignupComponent
 
   const SigninPage = ({handleSignIn}) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-  
+    const [showSignup, setShowSignup] = useState(false); // New state variable
+
     const handleSubmit = (event) => {
       event.preventDefault();
       // handle signup
@@ -12,29 +14,7 @@ import React, { useState } from 'react';
   
     const handleSignup = (event) => {
       event.preventDefault();
-      fetch(`http://localhost:4000/v1/user/signup`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: username,
-          password: password,
-          email: "dummy@any.com"
-        }),
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.token) { // if the response contains a token, signup was successful
-          localStorage.setItem('token', data.token); // store the token
-          handleSignIn();
-        } else {
-          // handle signup failure
-        }
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+      setShowSignup(true); // Show the SignupComponent when signup button is clicked
       // You can call handleSignIn() here if signup is successful
       console.log("signup");
     };
@@ -58,8 +38,10 @@ import React, { useState } from 'react';
       .then(response => response.json())
       .then(data => {
         if (data.token) {
+          localStorage.setItem('token', data.token); // store the token
           handleSignIn();
         } else {
+          console.error('Error: Token not found');
           // handle authentication failure
         }
       })
@@ -72,7 +54,8 @@ import React, { useState } from 'react';
 
     return (
         <div className="signin-form">
-        <form onSubmit={handleSubmit}>
+        { !showSignup &&
+          <form onSubmit={handleSubmit}>
           <label className="signin-label">
             Username:
             <input type="text" className="signin-input" value={username} onChange={(e) => setUsername(e.target.value)} />
@@ -84,6 +67,8 @@ import React, { useState } from 'react';
           <input type="submit" className="signin-submit" value="Signup" onClick={handleSignup}/>
           <input type="submit" className="signin-submit" value="Login" onClick={handleLogin}/>
         </form>
+        }
+        {showSignup && <SignupComponent handleSignIn={handleSignIn} setShowSignup={setShowSignup}/>} {/* Show the SignupComponent based on the state */}
       </div>
     );
   };
