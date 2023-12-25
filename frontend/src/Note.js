@@ -6,7 +6,7 @@ const Note = ({ note, handleUpdate, handleDelete }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleUpdate(note.id, newContent);
+    handleUpdate(note._id, newContent);
     setIsEditing(false);
   };
 
@@ -25,7 +25,7 @@ const Note = ({ note, handleUpdate, handleDelete }) => {
         <p onClick={() => setIsEditing(true)}>{note.content}</p>
         
       )}
-      <button className="delete-button" onClick={() => handleDelete(note.id)}>x</button>
+      <button className="delete-button" onClick={() => handleDelete(note._id)}>x</button>
     </div>
     
   );

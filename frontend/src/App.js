@@ -22,38 +22,28 @@ const App = () => {
   
   const [notes, setNotes] = useState([]);
 
-  useEffect(() => {
-    const fetchNotes = async () => {
-      const token = localStorage.getItem('token'); // Get the token from local storage
-      const userId = getUserIdFromToken(token); // Get the user ID from the token
-
-      try {
-        const response = await fetch('http://localhost:4000/v1/note/note', {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${token}`, // Send the token in the Authorization header
-          },
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          setNotes(data); // Set the notes state variable with the fetched data
-        } else {
-          console.log('Failed to fetch notes');
-        }
-      } catch (error) {
-        console.error('An error occurred while fetching the notes:', error);
+  const fetchNotes = async () => {
+    const token = localStorage.getItem('token'); // Get the token from local storage
+    const userId = getUserIdFromToken(token); // Get the user ID from the token
+  
+    try {
+      const response = await fetch('http://localhost:4000/v1/note/note', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`, // Send the token in the Authorization header
+        },
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        setNotes(data); // Set the notes state variable with the fetched data
+      } else {
+        console.log('Failed to fetch notes');
       }
-    };
-
-
-    // Usage:
-    const token = localStorage.getItem('token');
-    const userId = getUserIdFromToken(token);
-    console.log('User ID:', userId);
-
-    fetchNotes();
-  }, []);
+    } catch (error) {
+      console.error('An error occurred while fetching the notes:', error);
+    }
+  };
 
   const [isSignedIn, setIsSignedIn] = useState(false); 
 
@@ -124,18 +114,19 @@ const App = () => {
   }, []);
 
   const handleUpdate = (id, newContent) => {
-    setNotes(notes.map(note => note.id === id ? { ...note, content: newContent } : note));
+    setNotes(notes.map(note => note._id === id ? { ...note, content: newContent } : note));
   };
 
   const handleSignIn = () => {
     setIsSignedIn(true);
+    fetchNotes();
   };
 
   return (
     <div className="App">
       <h1>{getGreeting()}, welcome to the note-taking app!</h1>
       { !isSignedIn && <AuthPage handleSignIn={handleSignIn} /> }
-      { isSignedIn &&
+      { isSignedIn && 
       <NoteList notes={notes} handleUpdate={handleUpdate} handleCreate={handleCreate} handleDelete={handleDelete}/>
       }
     </div>
