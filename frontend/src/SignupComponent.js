@@ -8,7 +8,7 @@ const SignupComponent = ({handleSignIn, setShowSignup}) => {
 const handleSignup = (event) => {
     event.preventDefault();
     // handle signup
-    fetch(`http://localhost:4000/v1/user/signup`, {
+    fetch(`/v1/user/signup`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ const handleSignup = (event) => {
 
 const resetPassword = async (email) => {
     try {
-      const response = await fetch('http://localhost:4000/v1/user/sendPasswordReset', {
+      const response = await fetch('/v1/user/sendPasswordReset', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -8,7 +8,7 @@ const ResetPassword = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const response = await fetch('http://localhost:4000/v1/reset/reset-password/:token', {
+    const response = await fetch('/v1/reset/reset-password/:token', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

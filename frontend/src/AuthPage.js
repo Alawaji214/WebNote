@@ -25,7 +25,7 @@ const SigninPage = ({ handleSignIn }) => {
     // You can call handleSignIn() here if login is successful
     console.log("login");
 
-    fetch('http://localhost:4000/v1/user/login', { // replace with your server URL
+    fetch('/v1/user/login', { // replace with your server URL
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
