@@ -7,7 +7,7 @@ const authenticateToken = require("../middlewares/authenticateToken");
 
 router.get("/note",authenticateToken, async (req, res) => {
     try {
-        const userNotes = await Note.findAll({
+        const userNotes = await Note.find({
             userId: req.user.userId
         });
         res.status(201).json(userNotes);
