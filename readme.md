@@ -19,5 +19,12 @@ run frontend:
 ```shell
 cd frontend
 npm install
+npm run start-client
+```
+
+run all in one:
+```shell
+cd frontend
+npm install
 npm start
 ```

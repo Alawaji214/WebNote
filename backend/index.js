@@ -5,7 +5,7 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 const app = express();
 const port = 4000;
-
+const path = require('path')
 const userRoutes = require('./routes/userRoute')
 const noteRoutes = require('./routes/noteRoute')
 
@@ -19,9 +19,16 @@ const notes = [
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname,"..","frontend","build")))
+app.use(express.static("public"))
 
 app.use('/v1/user', userRoutes);
 app.use('/v1/note', noteRoutes);
+
+
+app.use((req,res,next)=>{
+    res.sendFile(path.join(__dirname,"..","frontend","build","index.html"))
+})
 
 // Define routes
 app.get('/', (req, res) => {
