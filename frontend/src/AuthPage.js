@@ -25,7 +25,8 @@ import React, { useState } from 'react';
       })
       .then(response => response.json())
       .then(data => {
-        if (data._id) { // if the response contains an _id, signup was successful
+        if (data.token) { // if the response contains a token, signup was successful
+          localStorage.setItem('token', data.token); // store the token
           handleSignIn();
         } else {
           // handle signup failure
