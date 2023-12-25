@@ -7,10 +7,32 @@ import { v4 as uuidv4 } from 'uuid';
 
 const App = () => {
   
-  const [notes, setNotes] = useState([
-    { id: uuidv4(), content: 'Note 1' },
-    { id: uuidv4(), content: 'Note 2' },
-  ]);
+  const [notes, setNotes] = useState([]);
+
+  useEffect(() => {
+    const fetchNotes = async () => {
+      const token = localStorage.getItem('token'); // Get the token from local storage
+
+      try {
+        const response = await fetch('http://localhost:4000/v1/note/note', {
+          headers: {
+            'Authorization': `Bearer ${token}`, // Send the token in the Authorization header
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setNotes(data); // Set the notes state variable with the fetched data
+        } else {
+          console.log('Failed to fetch notes');
+        }
+      } catch (error) {
+        console.error('An error occurred while fetching the notes:', error);
+      }
+    };
+
+    fetchNotes();
+  }, []);
 
   const [isSignedIn, setIsSignedIn] = useState(false); 
 
@@ -25,12 +47,33 @@ const App = () => {
     }
   };
 
-  const handleCreate = () => {
+  const handleCreate = async () => {
     const newNote = {
-      id: uuidv4(), // generate a new id
       content: 'Temp', // start with an empty content
+      userId: 'yourUserId', // replace with actual userId
     };
-    setNotes([newNote, ...notes]); // add the new note at the start of the list
+  
+    try {
+      const token = localStorage.getItem('token'); // Get the token from local storage
+  
+      const response = await fetch('http://localhost:4000/v1/note/note', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`, // Send the token in the Authorization header
+        },
+        body: JSON.stringify(newNote),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        setNotes([data, ...notes]); // add the new note at the start of the list
+      } else {
+        console.log('Failed to create note');
+      }
+    } catch (error) {
+      console.error('An error occurred while creating the note:', error);
+    }
   };
 
   const handleDelete = (id) => {
