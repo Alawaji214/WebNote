@@ -8,6 +8,7 @@ const port = 4000;
 const path = require('path')
 const userRoutes = require('./routes/userRoute')
 const noteRoutes = require('./routes/noteRoute')
+const restRoutes = require('./routes/resetPassword')
 
 // Mock user and notes data
 const user = { id: 1, name: 'John Doe' };
@@ -24,6 +25,7 @@ app.use(express.static("public"))
 
 app.use('/v1/user', userRoutes);
 app.use('/v1/note', noteRoutes);
+app.use('/v1/reset', restRoutes);
 
 
 app.use((req,res,next)=>{
