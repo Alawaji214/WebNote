@@ -41,12 +41,12 @@ router.delete("/note/:noteId",authenticateToken, async (req, res) => {
 router.put("/note/:noteId",authenticateToken, async (req, res) => {
     try {
         console.log(req.params.noteId)
-        const updatedNote = await Note.findOneAndUpdate({
+        const originalNote = await Note.findOneAndUpdate({
             _id: req.params.noteId,
             userId: req.user.userId
         },
         { $set: {content:  req.body.content } });
-        res.status(200).json(updatedNote);
+        res.status(200).json(originalNote);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
