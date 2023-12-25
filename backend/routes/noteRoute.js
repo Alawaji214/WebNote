@@ -29,11 +29,11 @@ router.post("/note",authenticateToken, async (req, res) => {
 });
 router.delete("/note/:noteId",authenticateToken, async (req, res) => {
     try {
-        const userNotes = await Note.findAll({
+        const originalNote = await Note.deleteOne({
             userId: req.user.userId,
-            __id: req.params.noteId
+            _id: req.params.noteId
         });
-        res.status(201).json(userNotes);
+        res.status(201).json(originalNote);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
