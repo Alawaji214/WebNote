@@ -36,7 +36,7 @@ const handleSignup = (event) => {
 
 const resetPassword = async (email) => {
     try {
-      const response = await fetch('/v1/user/sendPasswordReset', {
+      const response = await fetch('/v1/reset/sendPasswordReset', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
