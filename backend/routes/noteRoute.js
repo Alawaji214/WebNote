@@ -27,6 +27,22 @@ router.post("/note",authenticateToken, async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 });
+
+router.get("/note/:noteId",authenticateToken, async (req, res) => {
+    try {
+        const note = await Note.findOne({
+            userId: req.user.userId,
+            _id: req.params.noteId
+        });
+        if(note == null){
+            res.status(404).json({content: 'Not found'});
+            return
+        }
+        res.status(200).json(note);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});
 router.delete("/note/:noteId",authenticateToken, async (req, res) => {
     try {
         const originalNote = await Note.deleteOne({
