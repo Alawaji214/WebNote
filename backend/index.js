@@ -28,10 +28,10 @@ app.use('/v1/note', noteRoutes);
 app.use('/v1/reset', restRoutes);
 
 
-app.use((req,res,next)=>{
-    // res.sendFile(path.join(__dirname,"..","frontend","build","index.html"))
-    res.sendFile(path.join(__dirname,"public","index.html"))
-})
+// app.use((req,res,next)=>{
+//     // res.sendFile(path.join(__dirname,"..","frontend","build","index.html"))
+//     res.sendFile(path.join(__dirname,"public","index.html"))
+// })
 
 // Define routes
 app.get('/', (req, res) => {
