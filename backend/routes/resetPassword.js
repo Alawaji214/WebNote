@@ -1,19 +1,34 @@
 const express = require("express");
 const router = express.Router();
-
+const ForgetPassword = require('../models/forget-password')
 const nodemailer = require('nodemailer');
 // const { getSecret } = require('./secretManager');
+const uuid = require('uuid')
 
 
 router.post('/sendPasswordReset', async (req, res) => {
-    const { email } = req.body;
+    const {email} = req.body;
     if (!email) {
         return res.status(400).send('Email is required');
     }
 
     // Generate your password reset link or token here
-    const token = 'test';
-    const resetLink = `https://yourapp.com/reset-password?token=${token}`;
+    let token = uuid.v4();
+    const existedForget = await ForgetPassword.findOne({
+        email: req.body.email,
+        used: false
+    })
+    if ( existedForget == null) {
+        const forgetPassword = new ForgetPassword({
+            email: req.body.email,
+            token: token
+        });
+        await forgetPassword.save();
+    } else {
+        token = existedForget.token;
+    }
+
+    const resetLink = `${process.env.APP_PROTO}://${process.env.APP_HOST}:${process.env.APP_PORT}/reset-password?token=${token}`;
 
     // Create a Nodemailer transporter
     const transporter = nodemailer.createTransport({
