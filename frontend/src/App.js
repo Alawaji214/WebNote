@@ -4,35 +4,46 @@ import AuthPage from './AuthPage';
 import './App.css';
 
 import { v4 as uuidv4 } from 'uuid';
+import { jwtDecode } from "jwt-decode";
+
+const getUserIdFromToken = (token) => {
+  try {
+    const decoded = jwtDecode(token);
+    return decoded.userId;
+  } catch (error) {
+    console.log('Error:', error);
+    return null;
+  }
+};
+
+
 
 const App = () => {
   
   const [notes, setNotes] = useState([]);
 
-  useEffect(() => {
-    const fetchNotes = async () => {
-      const token = localStorage.getItem('token'); // Get the token from local storage
-
-      try {
-        const response = await fetch('http://localhost:4000/v1/note/note', {
-          headers: {
-            'Authorization': `Bearer ${token}`, // Send the token in the Authorization header
-          },
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          setNotes(data); // Set the notes state variable with the fetched data
-        } else {
-          console.log('Failed to fetch notes');
-        }
-      } catch (error) {
-        console.error('An error occurred while fetching the notes:', error);
+  const fetchNotes = async () => {
+    const token = localStorage.getItem('token'); // Get the token from local storage
+    const userId = getUserIdFromToken(token); // Get the user ID from the token
+  
+    try {
+      const response = await fetch('http://localhost:4000/v1/note/note', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`, // Send the token in the Authorization header
+        },
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        setNotes(data); // Set the notes state variable with the fetched data
+      } else {
+        console.log('Failed to fetch notes');
       }
-    };
-
-    fetchNotes();
-  }, []);
+    } catch (error) {
+      console.error('An error occurred while fetching the notes:', error);
+    }
+  };
 
   const [isSignedIn, setIsSignedIn] = useState(false); 
 
@@ -50,7 +61,7 @@ const App = () => {
   const handleCreate = async () => {
     const newNote = {
       content: 'Temp', // start with an empty content
-      userId: 'yourUserId', // replace with actual userId
+      userId: getUserIdFromToken(localStorage.getItem('token')), // use the actual userId from getUserIdFromToken
     };
   
     try {
@@ -76,9 +87,26 @@ const App = () => {
     }
   };
 
-  const handleDelete = (id) => {
-    const newNotes = notes.filter(note => note.id !== id);
-    setNotes(newNotes);
+  const handleDelete = async (id) => {
+    try {
+      const token = localStorage.getItem('token'); // Get the token from local storage
+  
+      const response = await fetch(`http://localhost:4000/v1/note/note/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`, // Send the token in the Authorization header
+        },
+      });
+  
+      if (response.ok) {
+        console.log('Note deleted successfully');
+        // Update your state here to remove the note from your list
+      } else {
+        console.log('Failed to delete note');
+      }
+    } catch (error) {
+      console.error('An error occurred while deleting the note:', error);
+    }
   };
 
   useEffect(() => {
@@ -86,18 +114,19 @@ const App = () => {
   }, []);
 
   const handleUpdate = (id, newContent) => {
-    setNotes(notes.map(note => note.id === id ? { ...note, content: newContent } : note));
+    setNotes(notes.map(note => note._id === id ? { ...note, content: newContent } : note));
   };
 
   const handleSignIn = () => {
     setIsSignedIn(true);
+    fetchNotes();
   };
 
   return (
     <div className="App">
       <h1>{getGreeting()}, welcome to the note-taking app!</h1>
       { !isSignedIn && <AuthPage handleSignIn={handleSignIn} /> }
-      { isSignedIn &&
+      { isSignedIn && 
       <NoteList notes={notes} handleUpdate={handleUpdate} handleCreate={handleCreate} handleDelete={handleDelete}/>
       }
     </div>
