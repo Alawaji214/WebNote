@@ -14,7 +14,7 @@
   "scripts": {
     "start-client": "react-scripts start",
     "build": "react-scripts build",
-    "cp-build-to-backend": "cp -r build ../backend/public",
+    "cp-build-to-backend": "rm -r ../backend/public && cp -r build ../backend/public",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "start": "npm run build && npm run cp-build-to-backend && (cd ../backend && npm start)"
