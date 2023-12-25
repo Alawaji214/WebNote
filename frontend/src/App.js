@@ -101,6 +101,7 @@ const App = () => {
       if (response.ok) {
         console.log('Note deleted successfully');
         // Update your state here to remove the note from your list
+        setNotes(notes.filter(note => note._id !== id));
       } else {
         console.log('Failed to delete note');
       }
@@ -113,8 +114,28 @@ const App = () => {
     document.title = `${getGreeting()}, welcome to the note-taking app!`;
   }, []);
 
-  const handleUpdate = (id, newContent) => {
-    setNotes(notes.map(note => note._id === id ? { ...note, content: newContent } : note));
+  const handleUpdate = async (id, newContent) => {
+    try {
+      const token = localStorage.getItem('token'); // Get the token from local storage
+  
+      const response = await fetch(`http://localhost:4000/v1/note/note/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`, // Send the token in the Authorization header
+        },
+        body: JSON.stringify({ content: newContent }),
+      });
+  
+      if (response.ok) {
+        console.log('Note updated successfully');
+        setNotes(notes.map(note => note._id === id ? { ...note, content: newContent } : note));
+      } else {
+        console.log('Failed to update note');
+      }
+    } catch (error) {
+      console.error('An error occurred while updating the note:', error);
+    }
   };
 
   const handleSignIn = () => {
