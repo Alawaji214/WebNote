@@ -4,8 +4,30 @@ const ForgetPassword = require('../models/forget-password')
 const nodemailer = require('nodemailer');
 // const { getSecret } = require('./secretManager');
 const uuid = require('uuid')
+const User = require("../models/user");
+const bcrypt = require('bcryptjs');
 
 
+
+async function updatePassword(email, newPassword) {
+    const hash = await bcrypt.hash(newPassword, 10);
+    await User.updateOne({ email: email }, { $set: { password: hash } });
+}
+
+router.post('/reset-password/:token', async (req, res) => {
+    const existedForget = await ForgetPassword.findOne({
+        token: req.params.token,
+        used: false
+    });
+    if (existedForget != null) {
+        await updatePassword(existedForget.email, req.body.password);
+        existedForget.used = true;
+        await existedForget.save();
+        res.status(200).json({status: 'password updated'})
+    } else {
+        return res.status(400).json({err: 'bad request'});
+    }
+});
 router.post('/sendPasswordReset', async (req, res) => {
     const {email} = req.body;
     if (!email) {
@@ -18,7 +40,7 @@ router.post('/sendPasswordReset', async (req, res) => {
         email: req.body.email,
         used: false
     })
-    if ( existedForget == null) {
+    if (existedForget == null) {
         const forgetPassword = new ForgetPassword({
             email: req.body.email,
             token: token
