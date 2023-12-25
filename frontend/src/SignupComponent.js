@@ -34,24 +34,55 @@ const handleSignup = (event) => {
     console.log("signup");
 };
 
-  return (
-    <form onSubmit={handleSignup}>
-        
-    <label className="signin-label">
-        Username:
-        <input type="text" className="signin-input"  placeholder="username" value={username} onChange={(e) => setUsername(e.target.value)} />
-    </label>
-    <label className="signin-label">
-        Email:
-        <input type="email" className="signin-input" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-    </label>
-    <label className="signin-label">
-        Password:
-        <input type="password" className="signin-input" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-    </label>
+const resetPassword = async (email) => {
+    try {
+      const response = await fetch('http://localhost:4000/v1/user/sendPasswordReset', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
 
-      <button className="signin-submit" type="submit">Sign Up</button>
-    </form>
+      if (response.ok) {
+        console.log('Password reset email sent successfully');
+      } else {
+        console.log('Failed to send password reset email');
+      }
+    } catch (error) {
+      console.error('An error occurred while sending the password reset email:', error);
+    }
+  };
+
+  return (
+    <div>
+        <form onSubmit={handleSignup}>
+
+        <label className="signin-label">
+            Username:
+            <input type="text" className="signin-input"  placeholder="username" value={username} onChange={(e) => setUsername(e.target.value)} />
+        </label>
+        <label className="signin-label">
+            Email:
+            <input type="email" className="signin-input" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        </label>
+        <label className="signin-label">
+            Password:
+            <input type="password" className="signin-input" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        </label>
+
+          <button className="signin-submit" type="submit">Sign Up</button>
+        </form>
+        <p> or reset your password</p>
+        <form onSubmit={(e) => { e.preventDefault(); resetPassword(email); }}>
+          <label className="signin-label">
+            Email:
+            <input type="email" className="signin-input" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          </label>
+          <button className="signin-submit" type="submit">Reset Password</button>
+        </form>
+    </div>
+
   );
 };
 
