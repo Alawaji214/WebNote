@@ -126,7 +126,7 @@ paths:
     options: # Added for CORS
       summary: "CORS support"
       description: "Enable CORS by returning the right headers"
-      operationId: "optionsGraphQL"
+      operationId: "optionsSignup"
       consumes:
         - "application/json"
       produces:
@@ -196,7 +196,7 @@ paths:
     options: # Added for CORS
       summary: "CORS support"
       description: "Enable CORS by returning the right headers"
-      operationId: "optionsGraphQL"
+      operationId: "optionsNotes"
       consumes:
         - "application/json"
       produces:
@@ -297,7 +297,7 @@ paths:
     options: # Added for CORS
       summary: "CORS support"
       description: "Enable CORS by returning the right headers"
-      operationId: "optionsGraphQL"
+      operationId: "optionsNote"
       consumes:
         - "application/json"
       produces:
@@ -338,7 +338,7 @@ paths:
     options: # Added for CORS
       summary: "CORS support"
       description: "Enable CORS by returning the right headers"
-      operationId: "optionsGraphQL"
+      operationId: "optionsResetPassword"
       consumes:
         - "application/json"
       produces:
@@ -376,7 +376,7 @@ paths:
     options: # Added for CORS
       summary: "CORS support"
       description: "Enable CORS by returning the right headers"
-      operationId: "optionsGraphQL"
+      operationId: "optionsSendPasswordReset"
       consumes:
         - "application/json"
       produces:
