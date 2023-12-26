@@ -161,7 +161,7 @@ const App = () => {
       <div className="App">
         <h1>{getGreeting()}, welcome to the note-taking app!</h1>
         <Routes>
-          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/" element={<DefaultContent />} />
         </Routes>
       </div>

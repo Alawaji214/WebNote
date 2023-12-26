@@ -42,11 +42,12 @@ const SigninPage = ({ handleSignIn }) => {
           handleSignIn();
         } else {
           console.error('Error: Token not found');
-          // handle authentication failure
+          alert("Error: Token not found");
         }
       })
       .catch((error) => {
         console.error('Error:', error);
+        alert("Login failed");
       });
 
     // handleSignIn();

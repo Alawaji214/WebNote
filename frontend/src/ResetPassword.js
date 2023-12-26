@@ -1,14 +1,15 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import React, { useState } from 'react';
 
 const ResetPassword = () => {
   const navigate = useNavigate();
   const [password, setPassword] = useState(''); // Define the password state variable
+  const { token } = useParams();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const response = await fetch('/v1/reset/reset-password/:token', {
+    const response = await fetch('/v1/reset/reset-password/${token}', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
