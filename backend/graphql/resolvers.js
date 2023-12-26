@@ -12,7 +12,7 @@ const resolvers = {
         // Fetch a single note by ID
         async note(_, {id}, context) {
             if (!context.user) throw new Error('Not Authenticated');
-            return await Note.find({ _id: id, userId: context.user.userId });
+            return await Note.findOne({ _id: id, userId: context.user.userId });
         },
     },
     Mutation: {
