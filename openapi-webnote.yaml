@@ -126,7 +126,7 @@ paths:
     options: # Added for CORS
       summary: "CORS support"
       description: "Enable CORS by returning the right headers"
-      operationId: "optionsSignup"
+      operationId: "optionsLogin"
       consumes:
         - "application/json"
       produces:
@@ -298,6 +298,14 @@ paths:
       summary: "CORS support"
       description: "Enable CORS by returning the right headers"
       operationId: "optionsNote"
+      parameters:
+        - in: header
+          name: Authorization
+          type: string
+        - name: "noteID"
+          in: path
+          required: true
+          type: string
       consumes:
         - "application/json"
       produces:
