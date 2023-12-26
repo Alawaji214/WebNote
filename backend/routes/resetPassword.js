@@ -14,9 +14,9 @@ async function updatePassword(email, newPassword) {
     await User.updateOne({ email: email }, { $set: { password: hash } });
 }
 
-router.post('/reset-password/:token', async (req, res) => {
+router.post('/reset-password', async (req, res) => {
     const existedForget = await ForgetPassword.findOne({
-        token: req.params.token,
+        token: req.query.token,
         used: false
     });
     if (existedForget != null) {
