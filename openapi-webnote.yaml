@@ -12,6 +12,7 @@ paths:
       operationId: GraphQL
       x-google-backend:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
       consumes:
       - "application/json"
       produces:
@@ -36,6 +37,7 @@ paths:
       summary: signup a new user
       x-google-backend:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
       description: |-
         Adds two input X and Y
       operationId: Signup
@@ -59,6 +61,7 @@ paths:
       summary: Login as a user
       x-google-backend:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
       description: |-
         login function for user that generate a token
       operationId: Login
@@ -85,6 +88,7 @@ paths:
       summary: return the user list of notes
       x-google-backend:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
       operationId: GetNotes
       responses:
         201:
@@ -100,6 +104,7 @@ paths:
       operationId: PostNote
       x-google-backend:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
       parameters:
         - in: body
           name: note
@@ -120,6 +125,7 @@ paths:
       operationId: GetNote
       x-google-backend:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
       parameters:
         - name: "noteID"
           in: path
@@ -138,6 +144,7 @@ paths:
       operationId: PutNote
       x-google-backend:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
       parameters:
         - name: "noteID"
           in: path
@@ -161,6 +168,7 @@ paths:
       operationId: DeleteNote
       x-google-backend:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
       parameters:
       - name: "noteID"
         in: path
@@ -180,6 +188,7 @@ paths:
       operationId: ResetPassword
       x-google-backend:
         address: https://us-central1-note-409215.cloudfunctions.net
+        path_translation: APPEND_PATH_TO_ADDRESS
       parameters:
         - in: query
           name: token
@@ -199,6 +208,7 @@ paths:
       operationId: RequestResetPassword
       x-google-backend:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
           description: "password updated"
