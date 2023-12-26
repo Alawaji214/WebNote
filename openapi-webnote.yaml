@@ -90,6 +90,10 @@ paths:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       operationId: GetNotes
+      parameters:
+        - in: header
+          name: Authorization
+          type: string
       responses:
         201:
           description: list of notes
@@ -105,7 +109,10 @@ paths:
       x-google-backend:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
-      parameters:
+      parameters:        
+        - in: header
+          name: Authorization
+          type: string
         - in: body
           name: note
           description: The note to add.
@@ -126,7 +133,10 @@ paths:
       x-google-backend:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
-      parameters:
+      parameters:        
+        - in: header
+          name: Authorization
+          type: string
         - name: "noteID"
           in: path
           required: true
@@ -145,16 +155,19 @@ paths:
       x-google-backend:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
-      parameters:
-        - name: "noteID"
-          in: path
-          required: true
-          type: string
-        - in: body
-          name: note
-          description: the note to be updated
-          schema:
-            $ref: "#/definitions/Note"
+      parameters:        
+      - in: header
+        name: Authorization
+        type: string
+      - name: "noteID"
+        in: path
+        required: true
+        type: string
+      - in: body
+        name: note
+        description: the note to be updated
+        schema:
+          $ref: "#/definitions/Note"
       responses:
         200:
           description: updated note
@@ -170,6 +183,9 @@ paths:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
       parameters:
+      - in: header
+        name: Authorization
+        type: string
       - name: "noteID"
         in: path
         required: true
