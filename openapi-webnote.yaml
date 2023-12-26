@@ -79,7 +79,7 @@ paths:
     options: # Added for CORS
       summary: "CORS support"
       description: "Enable CORS by returning the right headers"
-      operationId: "optionsGraphQL"
+      operationId: "optionsSignup"
       consumes:
         - "application/json"
       produces:
