@@ -63,6 +63,10 @@ paths:
         login function for user that generate a token
       operationId: Login
       parameters:
+        - name: "noteID"
+          in: path
+          required: true
+          type: string
         - in: body
           name: input
           description: The user to create.
