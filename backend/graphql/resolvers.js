@@ -33,7 +33,7 @@ const resolvers = {
                 { $set: {content:  content } });
         },
         // Delete a note
-        async deleteNote(_, { id }) {
+        async deleteNote(_, { id }, context) {
             if (!context.user) throw new Error('Not Authenticated');
             return await Note.deleteOne({
                 userId: context.user.userId,
