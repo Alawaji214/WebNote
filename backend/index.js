@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+const { ApolloServer } = require('apollo-server-express');
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
@@ -9,19 +10,24 @@ const path = require('path')
 const userRoutes = require('./routes/userRoute')
 const noteRoutes = require('./routes/noteRoute')
 const restRoutes = require('./routes/resetPassword')
+const typeDefs = require('./graphql/typeDefs');
+const resolvers = require('./graphql/resolvers');
+const authenticateTokenGraphql = require("./middlewares/authenticateTokenGraphql");
 
-// Mock user and notes data
-const user = { id: 1, name: 'John Doe' };
-const notes = [
-  { userId: 1, content: 'Note 1' },
-  { userId: 1, content: 'Note 2' },
-  { userId: 2, content: 'Note 3' },
-];
+const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    context: ({ req }) => {
+        // Check user token
+        const user = authenticateTokenGraphql(req);
+        return { user };
+    }
+});
 
 app.use(cors());
 app.use(express.json());
 // app.use(express.static(path.join(__dirname,"..","frontend","build")))
-app.use(express.static("public"))
+// app.use(express.static("public"))
 
 app.use('/v1/user', userRoutes);
 app.use('/v1/note', noteRoutes);
@@ -33,21 +39,12 @@ app.use('/v1/reset', restRoutes);
 //     res.sendFile(path.join(__dirname,"public","index.html"))
 // })
 
-// Define routes
-app.get('/', (req, res) => {
-    res.send('Welcome to WebNote!');
-});
-
-app.get('/notes', (req, res) => {
-    // Filter notes for the logged-in user
-    const userNotes = notes.filter(note => note.userId === user.id);
-    res.json(userNotes);
-});
-
 // Function to start the server
 async function startServer() {
     try {
         await connectDB();  // Wait for database connection
+        await server.start();
+        server.applyMiddleware({ app });
         app.listen(port, () => {
             console.log(`Server is running on port ${port}`);
         });
