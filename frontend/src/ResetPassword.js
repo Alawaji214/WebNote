@@ -9,7 +9,7 @@ const ResetPassword = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const response = await fetch('/v1/reset/reset-password/${token}', {
+    const response = await fetch('https://note-gateway3-2m0hc1vk.uc.gateway.dev/v1/reset/reset-password/${token}', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
