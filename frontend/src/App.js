@@ -165,7 +165,7 @@ const App = () => {
           <Route path="/" element={<DefaultContent />} />
         </Routes>
       </div>
-     </Router>
+    </Router>
   );
 };
 
