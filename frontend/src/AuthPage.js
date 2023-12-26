@@ -25,7 +25,7 @@ const SigninPage = ({ handleSignIn }) => {
     // You can call handleSignIn() here if login is successful
     console.log("login");
 
-    fetch('https://note-gateway3-2m0hc1vk.uc.gateway.dev/v1/user/login', { // replace with your server URL
+    fetch('https://note-gateway9-2m0hc1vk.uc.gateway.dev/v1/user/login', { // replace with your server URL
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
