@@ -17,7 +17,7 @@ const resolvers = {
     },
     Mutation: {
         // Add a new note
-        async addNote(_, { content, userId },context ) {
+        async addNote(_, { content },context ) {
             if (!context.user) throw new Error('Not Authenticated');
             const newNote = new Note({ content, userId: context.user.userId });
             await newNote.save();
