@@ -9,6 +9,7 @@ paths:
   /graphql:
     post:
       summary: "GraphQL"
+      operationId: GraphQL
       x-google-backend:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
       consumes:
