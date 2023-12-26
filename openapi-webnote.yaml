@@ -6,14 +6,6 @@ info:
 schemes:
   - https
 
-securityDefinitions:
-  Bearer:
-    type: apiKey
-    name: Authorization
-    in: header
-    description: >-
-      Enter the token with the `Bearer: ` prefix, e.g. "Bearer abcde12345".
-
 paths:
   /graphql:
     post:
@@ -22,6 +14,7 @@ paths:
       x-google-backend:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
+        disable_auth: True
       consumes:
       - "application/json"
       produces:
@@ -47,6 +40,7 @@ paths:
       x-google-backend:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
+        disable_auth: True
       description: |-
         Adds two input X and Y
       operationId: Signup
@@ -71,6 +65,7 @@ paths:
       x-google-backend:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
+        disable_auth: True
       description: |-
         login function for user that generate a token
       operationId: Login
@@ -98,6 +93,7 @@ paths:
       x-google-backend:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
+        disable_auth: True
       security:
         - Bearer: []
       operationId: GetNotes
@@ -122,6 +118,7 @@ paths:
       x-google-backend:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
+        disable_auth: True
       parameters:        
         - in: header
           name: Authorization
@@ -146,6 +143,7 @@ paths:
       x-google-backend:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
+        disable_auth: True
       security:
         - Bearer: []
       parameters:        
@@ -170,6 +168,7 @@ paths:
       x-google-backend:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
+        disable_auth: True
       security:
         - Bearer: []
       parameters:        
@@ -199,6 +198,7 @@ paths:
       x-google-backend:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
+        disable_auth: True
       security:
         - Bearer: []
       parameters:
@@ -224,6 +224,7 @@ paths:
       x-google-backend:
         address: https://us-central1-note-409215.cloudfunctions.net
         path_translation: APPEND_PATH_TO_ADDRESS
+        disable_auth: True
       parameters:
         - in: query
           name: token
@@ -244,6 +245,7 @@ paths:
       x-google-backend:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
+        disable_auth: True
       responses:
         "200":
           description: "password updated"
