@@ -13,7 +13,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addNote(content: String!, userId: ID!): Note
+    addNote(content: String!): Note
     updateNote(id: ID!, content: String!): Note
     deleteNote(id: ID!): Note
   }
