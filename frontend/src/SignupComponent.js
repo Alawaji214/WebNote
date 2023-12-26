@@ -8,7 +8,7 @@ const SignupComponent = ({ handleSignIn, setShowSignup }) => {
   const handleSignup = (event) => {
     event.preventDefault();
     // handle signup
-    fetch(`/v1/user/signup`, {
+    fetch(`https://note-gateway3-2m0hc1vk.uc.gateway.dev/v1/user/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ const SignupComponent = ({ handleSignIn, setShowSignup }) => {
 
   const resetPassword = async (email) => {
     try {
-      const response = await fetch('/v1/reset/sendPasswordReset', {
+      const response = await fetch('https://note-gateway3-2m0hc1vk.uc.gateway.dev/v1/reset/sendPasswordReset', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
