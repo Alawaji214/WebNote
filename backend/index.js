@@ -26,6 +26,16 @@ const server = new ApolloServer({
 
 app.use(cors());
 app.options('*', cors());
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers,X-Access-Token,XKey,Authorization,lang,X-App-Client-Id,X-App-Client-Secret,X-App-Version-Code,X-App-Version-Name,X-App-Device-ID,X-App-OS,X-App-OS-Version,X-App-OS-Device-Model,X-App-OS-Device-Brand');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', 0);
+    next();
+});
 
 app.use(express.json());
 // app.use(express.static(path.join(__dirname,"..","frontend","build")))
