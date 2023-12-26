@@ -40,10 +40,10 @@ docker run -e MONGO_URI=mongodb://admin:1234@host.docker.internal:27017 \
 
 build image for GCP:
 ```shell
-docker build --platform linux/amd64 -t note-app:v10 .
+docker build --platform linux/amd64 -t note-app:v12 .
 gcloud auth configure-docker europe-west3-docker.pkg.dev
-docker tag note-app:v10 europe-west3-docker.pkg.dev/note-409215/note-repo/note-app:v10
-docker push europe-west3-docker.pkg.dev/note-409215/note-repo/note-app:v10
+docker tag note-app:v12 europe-west3-docker.pkg.dev/note-409215/note-repo/note-app:v12
+docker push europe-west3-docker.pkg.dev/note-409215/note-repo/note-app:v12
 ```
 
 https://cloud.mongodb.com/v2/6589caee77a8e02a026e8b78#/clusters

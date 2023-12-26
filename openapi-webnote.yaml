@@ -24,6 +24,15 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/GraphQLResponse"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+            Access-Control-Max-Age:
+              type: string
       parameters:
         - in: body
           name: body
@@ -74,6 +83,15 @@ paths:
           description: "success"
           schema:
             $ref: "#/definitions/User"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+            Access-Control-Max-Age:
+              type: string
         "400":
           description: "signup failed"
     options: # Added for CORS
@@ -119,6 +137,15 @@ paths:
           description: ""
           schema:
             $ref: "#/definitions/Response"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+            Access-Control-Max-Age:
+              type: string
         401:
           description: "Authentication failed"
         500:
@@ -164,6 +191,15 @@ paths:
           description: list of notes
           schema:
             $ref: "#/definitions/Notes"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+            Access-Control-Max-Age:
+              type: string
         400:
           description: "Error"
     post:
@@ -191,8 +227,26 @@ paths:
           description: "Sucess"
           schema:
             $ref: "#/definitions/Note"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+            Access-Control-Max-Age:
+              type: string
         400:
           description: "Error"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+            Access-Control-Max-Age:
+              type: string
     options: # Added for CORS
       summary: "CORS support"
       description: "Enable CORS by returning the right headers"
@@ -237,8 +291,26 @@ paths:
           description: Found
           schema:
             $ref: "#/definitions/Note"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+            Access-Control-Max-Age:
+              type: string
         "400":
           description: "Error"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+            Access-Control-Max-Age:
+              type: string
     put:
       tags:
         - "Note"
@@ -267,8 +339,26 @@ paths:
           description: updated note
           schema:
             $ref: "#/definitions/Notes"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+            Access-Control-Max-Age:
+              type: string
         400:
           description: "Error"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+            Access-Control-Max-Age:
+              type: string
     delete:
       tags:
         - "Note"
@@ -292,8 +382,26 @@ paths:
           description: Note deleted
           schema:
             $ref: "#/definitions/Notes"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+            Access-Control-Max-Age:
+              type: string
         400:
           description: "Error"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+            Access-Control-Max-Age:
+              type: string
     options: # Added for CORS
       summary: "CORS support"
       description: "Enable CORS by returning the right headers"
@@ -341,8 +449,26 @@ paths:
           description: "password updated"
           schema:
             $ref: "#/definitions/Notes"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+            Access-Control-Max-Age:
+              type: string
         "400":
           description: "Error"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+            Access-Control-Max-Age:
+              type: string
     options: # Added for CORS
       summary: "CORS support"
       description: "Enable CORS by returning the right headers"
@@ -377,10 +503,37 @@ paths:
           description: "password updated"
           schema:
             $ref: "#/definitions/Notes"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+            Access-Control-Max-Age:
+              type: string
         "400":
           description: "Error"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+            Access-Control-Max-Age:
+              type: string
         "500":
           description: "Error"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+            Access-Control-Max-Age:
+              type: string
     options: # Added for CORS
       summary: "CORS support"
       description: "Enable CORS by returning the right headers"
