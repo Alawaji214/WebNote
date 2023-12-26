@@ -1,0 +1,252 @@
+swagger: "2.0"
+info:
+  title: WebNote
+  version: 1.0.0
+  description: NoteApp
+schemes:
+  - https
+paths:
+  /graphql:
+    post:
+      summary: "GraphQL"
+      x-google-backend:
+        address: https://note-app-sn6slqz5ha-uc.a.run.app
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/GraphQLResponse"
+      parameters:
+        - in: body
+          name: body
+          description: "GraphQL query"
+          required: true
+          schema:
+            $ref: "#/definitions/GraphQLQuery"
+
+  "/v1/user/signup":
+    post:
+      tags:
+        - AuthService
+      summary: signup a new user
+      x-google-backend:
+        address: https://note-app-sn6slqz5ha-uc.a.run.app
+      description: |-
+        Adds two input X and Y
+      operationId: Signup
+      parameters:
+        - in: body
+          name: input
+          description: The user to create.
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        "200":
+          description: "success"
+          schema:
+            $ref: "#/definitions/User"
+        "400":
+          description: "signup failed"
+  "/v1/user/login":
+    post:
+      tags:
+        - AuthService
+      summary: Login as a user
+      x-google-backend:
+        address: https://note-app-sn6slqz5ha-uc.a.run.app
+      description: |-
+        login function for user that generate a token
+      operationId: Login
+      parameters:
+        - in: body
+          name: input
+          description: The user to create.
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: "#/definitions/Response"
+        401:
+          description: "Authentication failed"
+        500:
+          description: "Server error"
+
+  "/v1/note/note":
+    get:
+      tags:
+        - Note
+      summary: return the user list of notes
+      x-google-backend:
+        address: https://note-app-sn6slqz5ha-uc.a.run.app
+      operationId: GetNotes
+      responses:
+        201:
+          description: list of notes
+          schema:
+            $ref: "#/definitions/Notes"
+        400:
+          description: "Error"
+    post:
+      tags:
+        - Note
+      summary: post a new note
+      operationId: PostNote
+      x-google-backend:
+        address: https://note-app-sn6slqz5ha-uc.a.run.app
+      parameters:
+        - in: body
+          name: note
+          description: The note to add.
+          schema:
+            $ref: "#/definitions/Note"
+      responses:
+        201:
+          description: "Sucess"
+          schema:
+            $ref: "#/definitions/Note"
+        400:
+          description: "Error"
+  "/v1/note/note/{noteID}":
+    get:
+      tags:
+        - "Note"
+      operationId: GetNote
+      x-google-backend:
+        address: https://note-app-sn6slqz5ha-uc.a.run.app
+      parameters:
+        - name: "noteID"
+          in: path
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Found
+          schema:
+            $ref: "#/definitions/Note"
+        "400":
+          description: "Error"
+    put:
+      tags:
+        - "Note"
+      operationId: PutNote
+      x-google-backend:
+        address: https://note-app-sn6slqz5ha-uc.a.run.app
+      parameters:
+        - in: body
+          name: note
+          description: the note to be updated
+          schema:
+            $ref: "#/definitions/Note"
+      responses:
+        200:
+          description: updated note
+          schema:
+            $ref: "#/definitions/Notes"
+        400:
+          description: "Error"
+    delete:
+      tags:
+        - "Note"
+      operationId: DeleteNote
+      x-google-backend:
+        address: https://note-app-sn6slqz5ha-uc.a.run.app
+      parameters:
+      - name: "noteID"
+        in: path
+        required: true
+        type: string
+      responses:
+        201:
+          description: Note deleted
+          schema:
+            $ref: "#/definitions/Notes"
+        400:
+          description: "Error"
+  "/reset-password":
+    post:
+      tags:
+        - "reset"
+      operationId: ResetPassword
+      x-google-backend:
+        address: https://us-central1-note-409215.cloudfunctions.net
+      parameters:
+        - in: query
+          name: token
+          required: true
+          type: string
+      responses:
+        "200":
+          description: "password updated"
+          schema:
+            $ref: "#/definitions/Notes"
+        "400":
+          description: "Error"
+  "/v1/reset/sendPasswordReset":
+    post:
+      tags:
+        - "reset"
+      operationId: RequestResetPassword
+      x-google-backend:
+        address: https://note-app-sn6slqz5ha-uc.a.run.app
+      responses:
+        "200":
+          description: "password updated"
+          schema:
+            $ref: "#/definitions/Notes"
+        "400":
+          description: "Error"
+        "500":
+          description: "Error"
+
+
+definitions:
+  User:
+    type: object
+    description: a user of the system
+    properties:
+      username:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+  Note:
+    type: object
+    description: a Note
+    properties: 
+      userId: 
+        type: string
+      content:
+        type: string
+  Notes:
+    type: array
+    description: a Notes
+    properties: 
+      notes: 
+        type: object
+
+  Response:
+    type: object
+    description: a return message from the server
+    properties: 
+      message:
+        type: string
+      token:
+        type: string
+
+  GraphQLQuery:
+    type: "object"
+    properties:
+      query:
+        type: "string"
+  GraphQLResponse:
+    type: "object"
+    properties:
+      data:
+        type: "object"
