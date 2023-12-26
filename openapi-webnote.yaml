@@ -5,6 +5,13 @@ info:
   description: NoteApp
 schemes:
   - https
+securityDefinitions.
+  swagger: "2.0" info: title: Your API version: 1.0.0.
+    type: apiKey
+    name: Authorization
+    in: header
+security: Bearer: []
+Bearer: []
 paths:
   /graphql:
     post:
@@ -89,6 +96,8 @@ paths:
       x-google-backend:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
+      security:
+        - Bearer: []
       operationId: GetNotes
       parameters:
         - in: header
@@ -106,6 +115,8 @@ paths:
         - Note
       summary: post a new note
       operationId: PostNote
+      security:
+        - Bearer: []
       x-google-backend:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
@@ -133,6 +144,8 @@ paths:
       x-google-backend:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
+      security:
+        - Bearer: []
       parameters:        
         - in: header
           name: Authorization
@@ -155,6 +168,8 @@ paths:
       x-google-backend:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
+      security:
+        - Bearer: []
       parameters:        
       - in: header
         name: Authorization
@@ -182,6 +197,8 @@ paths:
       x-google-backend:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
+      security:
+        - Bearer: []
       parameters:
       - in: header
         name: Authorization
