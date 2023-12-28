@@ -36,8 +36,6 @@ paths:
       responses:
         "200":
           description: "password updated"
-          schema:
-            $ref: "#/definitions/Notes"
           headers:
             Access-Control-Allow-Origin:
               type: string
@@ -65,7 +63,7 @@ paths:
       consumes:
         - "application/json"
       produces:
-        - "application/json"
+        - "text/html"
       responses:
         "200":
           description: "CORS headers"
