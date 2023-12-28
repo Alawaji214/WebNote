@@ -46,10 +46,7 @@ app.use('/v1/note', noteRoutes);
 app.use('/v1/reset', restRoutes);
 
 
-app.use((req,res,next)=>{
-    // res.sendFile(path.join(__dirname,"..","frontend","build","index.html"))
-    res.sendFile(path.join(__dirname,"public","index.html"))
-})
+
 
 // Function to start the server
 async function startServer() {
@@ -57,6 +54,10 @@ async function startServer() {
         await connectDB();  // Wait for database connection
         await server.start();
         server.applyMiddleware({ app });
+        app.use((req,res,next)=>{
+            // res.sendFile(path.join(__dirname,"..","frontend","build","index.html"))
+            res.sendFile(path.join(__dirname,"public","index.html"))
+        })
         app.listen(port, () => {
             console.log(`Server is running on port ${port}`);
         });

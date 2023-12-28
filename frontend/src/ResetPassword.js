@@ -9,7 +9,7 @@ const ResetPassword = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const response = await fetch(`https://us-central1-note-409215.cloudfunctions.net/reset-password-functino?token=${token}`, {
+    const response = await fetch(`https://reset-gateway1-2m0hc1vk.uc.gateway.dev/reset-password?token=${token}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
