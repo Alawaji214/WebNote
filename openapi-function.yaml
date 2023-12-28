@@ -21,7 +21,7 @@ paths:
       operationId: ResetPassword
       x-google-backend:
         address: https://us-central1-note-409215.cloudfunctions.net
-        path_translation: APPEND_PATH_TO_ADDRESS
+#        path_translation: APPEND_PATH_TO_ADDRESS
         disable_auth: True
       parameters:
         - in: query

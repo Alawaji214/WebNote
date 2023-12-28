@@ -8,34 +8,45 @@ mongoose.connect(process.env.MONGODB_URI);
 
 async function updatePassword(email, newPassword) {
     const hash = await bcrypt.hash(newPassword, 10);
-    await User.updateOne({ email: email }, { $set: { password: hash } });
+    await User.updateOne({email: email}, {$set: {password: hash}});
 }
 
 exports.resetPassword = async (req, res) => {
-    // Check if the request method is POST
-    if (req.method !== 'POST') {
-        res.status(405).send('Method Not Allowed');
-        return;
-    }
+    res.set('Access-Control-Allow-Origin', '*');
 
-    try {
-        const token = req.query.token; // Adjust according to how you receive the token
-        const password = req.body.password; // Make sure to parse JSON body if needed
+    if (req.method === 'OPTIONS') {
+        // Send response to OPTIONS requests
+        res.set('Access-Control-Allow-Methods', 'GET');
+        res.set('Access-Control-Allow-Headers', 'Content-Type');
+        res.set('Access-Control-Max-Age', '3600');
+        res.status(204).send('');
+    } else {
 
-        const existedForget = await ForgetPassword.findOne({
-            token: token,
-            used: false
-        });
-
-        if (existedForget) {
-            await updatePassword(existedForget.email, password);
-            existedForget.used = true;
-            await existedForget.save();
-            res.status(200).json({ status: 'password updated' });
-        } else {
-            res.status(400).json({ err: 'bad request' });
+        // Check if the request method is POST
+        if (req.method !== 'POST') {
+            res.status(405).send('Method Not Allowed');
+            return;
         }
-    } catch (error) {
-        res.status(500).json({ err: 'internal server error' });
+
+        try {
+            const token = req.query.token; // Adjust according to how you receive the token
+            const password = req.body.password; // Make sure to parse JSON body if needed
+
+            const existedForget = await ForgetPassword.findOne({
+                token: token,
+                used: false
+            });
+
+            if (existedForget) {
+                await updatePassword(existedForget.email, password);
+                existedForget.used = true;
+                await existedForget.save();
+                res.status(200).json({status: 'password updated'});
+            } else {
+                res.status(400).json({err: 'bad request'});
+            }
+        } catch (error) {
+            res.status(500).json({err: 'internal server error'});
+        }
     }
 };
