@@ -43,7 +43,7 @@ build image for GCP:
 docker build --platform linux/amd64 -t note-app:v21 .
 gcloud auth configure-docker europe-west3-docker.pkg.dev
 docker tag note-app:v21 europe-west3-docker.pkg.dev/note-409215/note-repo/note-app:v21
-docker push europe-west3-docker.pkg.dev/note-409215/note-repo/note-app:v20
+docker push europe-west3-docker.pkg.dev/note-409215/note-repo/note-app:v21
 ```
 
 https://cloud.mongodb.com/v2/6589caee77a8e02a026e8b78#/clusters
