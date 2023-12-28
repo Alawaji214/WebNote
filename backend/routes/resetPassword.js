@@ -50,7 +50,7 @@ router.post('/sendPasswordReset', async (req, res) => {
         token = existedForget.token;
     }
 
-    const resetLink = `${process.env.WEB_PROTO}://${process.env.WEB_HOST}:${process.env.WEB_PORT}/reset-password?token=${token}`;
+    const resetLink = `${process.env.WEB_PROTO}://${process.env.WEB_HOST}:${process.env.WEB_PORT}/reset-password/${token}`;
 
     // Create a Nodemailer transporter
     const transporter = nodemailer.createTransport({
