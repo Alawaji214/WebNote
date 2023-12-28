@@ -1,0 +1,122 @@
+swagger: "2.0"
+info:
+  title: function
+  version: 1.0.0
+  description: function
+schemes:
+  - https
+x-google-backend:
+  address: https://us-central1-note-409215.cloudfunctions.net
+  # allowCors: True
+
+x-google-endpoints:
+- name: https://us-central1-note-409215.cloudfunctions.net
+  allowCors: True
+
+paths:
+  "/reset-password":
+    post:
+      tags:
+        - "reset"
+      operationId: ResetPassword
+      x-google-backend:
+        address: https://us-central1-note-409215.cloudfunctions.net
+        path_translation: APPEND_PATH_TO_ADDRESS
+        disable_auth: True
+      parameters:
+        - in: query
+          name: token
+          required: true
+          type: string
+      responses:
+        "200":
+          description: "password updated"
+          schema:
+            $ref: "#/definitions/Notes"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+            Access-Control-Max-Age:
+              type: string
+        "400":
+          description: "Error"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+            Access-Control-Max-Age:
+              type: string
+    options: # Added for CORS
+      summary: "CORS support"
+      description: "Enable CORS by returning the right headers"
+      operationId: "optionsResetPassword"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "CORS headers"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+            Access-Control-Max-Age:
+              type: string
+
+
+definitions:
+  User:
+    type: object
+    description: a user of the system
+    properties:
+      username:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+  Note:
+    type: object
+    description: a Note
+    properties: 
+      userId: 
+        type: string
+      content:
+        type: string
+  Notes:
+    type: array
+    description: a Notes
+    properties: 
+      notes: 
+        type: object
+
+  Response:
+    type: object
+    description: a return message from the server
+    properties: 
+      message:
+        type: string
+      token:
+        type: string
+
+  GraphQLQuery:
+    type: "object"
+    properties:
+      query:
+        type: "string"
+  GraphQLResponse:
+    type: "object"
+    properties:
+      data:
+        type: "object"
