@@ -10,8 +10,8 @@ x-google-backend:
   # allowCors: True
 
 x-google-endpoints:
-- name: https://note-app-sn6slqz5ha-uc.a.run.app
-  allowCors: True
+  - name: https://note-app-sn6slqz5ha-uc.a.run.app
+    allowCors: True
 
 paths:
   /graphql:
@@ -23,9 +23,9 @@ paths:
         path_translation: APPEND_PATH_TO_ADDRESS
         disable_auth: True
       consumes:
-      - "application/json"
+        - "application/json"
       produces:
-      - "application/json"
+        - "application/json"
       responses:
         "200":
           description: "successful operation"
@@ -220,7 +220,7 @@ paths:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
         disable_auth: True
-      parameters:        
+      parameters:
         - in: header
           name: Authorization
           type: string
@@ -285,7 +285,7 @@ paths:
         disable_auth: True
       security:
         - Bearer: []
-      parameters:        
+      parameters:
         - in: header
           name: Authorization
           type: string
@@ -328,19 +328,19 @@ paths:
         disable_auth: True
       security:
         - Bearer: []
-      parameters:        
-      - in: header
-        name: Authorization
-        type: string
-      - name: "noteID"
-        in: path
-        required: true
-        type: string
-      - in: body
-        name: note
-        description: the note to be updated
-        schema:
-          $ref: "#/definitions/Note"
+      parameters:
+        - in: header
+          name: Authorization
+          type: string
+        - name: "noteID"
+          in: path
+          required: true
+          type: string
+        - in: body
+          name: note
+          description: the note to be updated
+          schema:
+            $ref: "#/definitions/Note"
       responses:
         200:
           description: updated note
@@ -377,13 +377,13 @@ paths:
       security:
         - Bearer: []
       parameters:
-      - in: header
-        name: Authorization
-        type: string
-      - name: "noteID"
-        in: path
-        required: true
-        type: string
+        - in: header
+          name: Authorization
+          type: string
+        - name: "noteID"
+          in: path
+          required: true
+          type: string
       responses:
         201:
           description: Note deleted
@@ -581,22 +581,22 @@ definitions:
   Note:
     type: object
     description: a Note
-    properties: 
-      userId: 
+    properties:
+      userId:
         type: string
       content:
         type: string
   Notes:
     type: array
     description: a Notes
-    properties: 
-      notes: 
+    properties:
+      notes:
         type: object
 
   Response:
     type: object
     description: a return message from the server
-    properties: 
+    properties:
       message:
         type: string
       token:
