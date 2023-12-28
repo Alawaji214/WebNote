@@ -501,6 +501,12 @@ paths:
       tags:
         - "reset"
       operationId: RequestResetPassword
+      parameters:
+        - in: body
+          name: input
+          description: The user to create.
+          schema:
+            $ref: "#/definitions/SendPasswordReset"
       x-google-backend:
         address: https://note-app-sn6slqz5ha-uc.a.run.app
         path_translation: APPEND_PATH_TO_ADDRESS
@@ -508,8 +514,6 @@ paths:
       responses:
         "200":
           description: "password updated"
-          schema:
-            $ref: "#/definitions/Notes"
           headers:
             Access-Control-Allow-Origin:
               type: string
@@ -608,3 +612,9 @@ definitions:
     properties:
       data:
         type: "object"
+  SendPasswordReset:
+    type: object
+    description: send request email
+    properties:
+      message:
+        email: string
