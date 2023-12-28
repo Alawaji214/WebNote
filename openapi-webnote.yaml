@@ -616,5 +616,5 @@ definitions:
     type: object
     description: send request email
     properties:
-      message:
-        email: string
+      email:
+        type: string
