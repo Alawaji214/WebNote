@@ -5,12 +5,11 @@ info:
   description: function
 schemes:
   - https
-x-google-backend:
-  address: https://us-central1-note-409215.cloudfunctions.net
-  # allowCors: True
-
+#x-google-backend:
+#  address: https://us-central1-note-409215.cloudfunctions.net
+#  # allowCors: True
 x-google-endpoints:
-- name: https://us-central1-note-409215.cloudfunctions.net
+- name: "https://us-central1-note-409215.cloudfunctions.net"
   allowCors: True
 
 paths:
@@ -20,8 +19,8 @@ paths:
         - "reset"
       operationId: ResetPassword
       x-google-backend:
-        address: https://us-central1-note-409215.cloudfunctions.net
-#        path_translation: APPEND_PATH_TO_ADDRESS
+        address: https://us-central1-note-409215.cloudfunctions.net/reset-password-functino
+        path_translation: CONSTANT_ADDRESS
         disable_auth: True
       parameters:
         - in: query
