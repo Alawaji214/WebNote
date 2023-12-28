@@ -12,8 +12,6 @@ x-google-backend:
 x-google-endpoints:
 - name: https://note-app-sn6slqz5ha-uc.a.run.app
   allowCors: True
-- name: https://note-gateway9-2m0hc1vk.uc.gateway.dev
-  allowCors: True
 
 paths:
   /graphql:
