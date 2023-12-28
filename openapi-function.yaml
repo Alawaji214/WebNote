@@ -5,11 +5,11 @@ info:
   description: function
 schemes:
   - https
-#x-google-backend:
-#  address: https://us-central1-note-409215.cloudfunctions.net
-#  # allowCors: True
+x-google-backend:
+  address: https://us-central1-note-409215.cloudfunctions.net
+  # allowCors: True
 x-google-endpoints:
-- name: "https://us-central1-note-409215.cloudfunctions.net"
+- name: https://us-central1-note-409215.cloudfunctions.net
   allowCors: True
 
 paths:
@@ -27,6 +27,12 @@ paths:
           name: token
           required: true
           type: string
+        - in: body
+          name: input
+          description: The user to create.
+          schema:
+            $ref: "#/definitions/ResetPassword"
+
       responses:
         "200":
           description: "password updated"
@@ -119,3 +125,8 @@ definitions:
     properties:
       data:
         type: "object"
+  ResetPassword:
+    type: "object"
+    properties:
+      password:
+        type: string
